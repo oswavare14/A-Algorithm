@@ -1,3 +1,5 @@
+import sys
+
 class Nodo():
 
     def __init__(self, padre=None, pos=None):
@@ -67,7 +69,7 @@ def astar(mapa, start, end):
             lista_A.append(i)
 
 def main():
-    txt = open('mapa_2.txt', 'r')
+    txt = open(sys.argv[1], 'r')
     tamaño = txt.readline()
     columnas = ""
     filas = ""
@@ -118,7 +120,7 @@ def main():
         mapa.append(temp)
 
     t = (0,0)
-    y = (3,4)
+    y = (2,2)
     path = astar(mapa, t, y)
     print(path)
 
