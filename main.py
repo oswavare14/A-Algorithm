@@ -50,7 +50,8 @@ def astar(mapa, start, end):
             if pos_nodo[0] > (len(mapa) - 1) or pos_nodo[0] < 0 or pos_nodo[1] > (len(mapa[len(mapa)-1]) -1) or pos_nodo[1] < 0:
                 continue
             # Pueda caminar en el mapa
-            if mapa[pos_nodo[0]][pos_nodo[1]] != '-':
+            if mapa[pos_nodo[0]][pos_nodo[1]] != '-' and mapa[pos_nodo[0]][pos_nodo[1]] != 'D' and mapa[pos_nodo[0]][pos_nodo[1]] != 'O' and \
+                    mapa[pos_nodo[0]][pos_nodo[1]] != '<' and mapa[pos_nodo[0]][pos_nodo[1]] != '>' and mapa[pos_nodo[0]][pos_nodo[1]] != '^' and mapa[pos_nodo[0]][pos_nodo[1]] != 'v':
                 continue
             nuevo = Nodo(nodo_actual, pos_nodo)
             hijo.append(nuevo)
@@ -69,12 +70,14 @@ def astar(mapa, start, end):
             lista_A.append(i)
 
 def main():
+    # Se lee lo que se manda desde consola
     txt = open(sys.argv[1], 'r')
     tamaño = txt.readline()
     columnas = ""
     filas = ""
     bandera = True;
 
+    #toma el tamaño de la matriz
     for i in tamaño:
         if i != ',':
             if bandera:
@@ -83,6 +86,7 @@ def main():
                 columnas += i
         else:
             bandera = False
+
 
     filas = int(filas)
     columnas = int(columnas)
@@ -93,6 +97,7 @@ def main():
     positionO = []
     inicio = []
 
+    # camptura todas las posiciones de carga y descarga
     for i in range(0,filas):
         temp = []
         contTemp = 0
@@ -119,8 +124,8 @@ def main():
                 contTemp+=1
         mapa.append(temp)
 
-    t = (0,0)
-    y = (2,2)
+    t = (1,0)
+    y = (5,10)
     path = astar(mapa, t, y)
     print(path)
 
